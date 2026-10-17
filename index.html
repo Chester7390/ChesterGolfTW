@@ -1,666 +1,387 @@
 <!DOCTYPE html>
-<html lang="zh-TW" class="scroll-smooth dark">
+<html lang="zh-TW" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chester Golf | 數據驅動 × 揮桿美學 × 自媒體風格</title>
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Canvas Confetti CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            golf: {
-              dark: '#0B1320',
-              card: '#111C2D',
-              border: '#1E2D42',
-              emerald: '#10B981',
-              green: '#065F46',
-              gold: '#F59E0B',
-              goldHover: '#D97706'
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chester Golf｜數據驅動的高爾夫品牌</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        golf: {
+                            dark: '#0A0F1D',
+                            card: '#141B2D',
+                            accent: '#10B981',
+                            gold: '#F59E0B',
+                            hover: '#059669'
+                        }
+                    }
+                }
             }
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
-          }
         }
-      }
-    }
-  </script>
-
-  <style>
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #0B1320;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1E2D42;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #10B981;
-    }
-
-    /* Glow animation for accent elements */
-    @keyframes goldGlow {
-      0%, 100% { box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
-      50% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.5); }
-    }
-    .gold-glow {
-      animation: goldGlow 4s infinite;
-    }
-
-    .glass-card {
-      background: rgba(17, 28, 45, 0.75);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-  </style>
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-golf-dark text-slate-100 font-sans selection:bg-golf-emerald selection:text-slate-950 flex flex-col min-h-screen">
+<body class="bg-golf-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
-  <!-- ==================== NAVBAR ==================== -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-golf-dark/80 backdrop-blur-md border-b border-golf-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="#" class="flex items-center space-x-3 group">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-golf-emerald via-emerald-600 to-emerald-900 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
-          <i class="fa-solid fa-golf-ball-tee text-slate-950"></i>
-        </div>
-        <div>
-          <span class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-slate-100 via-slate-200 to-golf-gold bg-clip-text text-transparent">CHESTER GOLF</span>
-          <span class="block text-[10px] tracking-widest text-golf-emerald font-semibold uppercase">Precision & Analytics</span>
-        </div>
-      </a>
-
-      <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-        <a href="#about" class="text-slate-300 hover:text-golf-emerald transition-colors">關於 Chester</a>
-        <a href="#analytics" class="text-slate-300 hover:text-golf-emerald transition-colors flex items-center gap-1.5">
-          <i class="fa-solid fa-chart-line text-xs text-golf-gold"></i> 揮桿數據分析
-        </a>
-        <a href="#media" class="text-slate-300 hover:text-golf-emerald transition-colors">影音創作</a>
-        <a href="#contact" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-golf-emerald to-emerald-600 text-slate-950 font-bold hover:shadow-lg hover:shadow-emerald-500/25 transition-all hover:-translate-y-0.5">
-          合作洽詢
-        </a>
-      </nav>
-
-      <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white text-2xl focus:outline-none" aria-label="Toggle Menu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-    </div>
-
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-golf-card border-b border-golf-border px-4 pt-3 pb-6 space-y-3">
-      <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-golf-emerald py-2">關於 Chester</a>
-      <a href="#analytics" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-golf-emerald py-2">揮桿數據分析</a>
-      <a href="#media" onclick="toggleMobileMenu()" class="block text-slate-300 hover:text-golf-emerald py-2">影音創作</a>
-      <a href="#contact" onclick="toggleMobileMenu()" class="block text-center py-2.5 rounded-xl bg-golf-emerald text-slate-950 font-bold">合作洽詢</a>
-    </div>
-  </header>
-
-  <!-- ==================== HERO SECTION ==================== -->
-  <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden flex items-center min-h-[90vh]">
-    <!-- Background Gradient Accents -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-600/15 rounded-full blur-[140px] pointer-events-none"></div>
-    <div class="absolute top-1/3 right-10 w-[300px] h-[300px] bg-amber-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <!-- Left Banner Content -->
-        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-golf-emerald text-xs font-semibold tracking-wider uppercase">
-            <span class="w-2 h-2 rounded-full bg-golf-emerald animate-ping"></span>
-            Sports Science × Golf Performance
-          </div>
-          
-          <h1 class="text-4xl sm:text-6xl font-black text-white leading-tight tracking-tight">
-            數據驅動 <span class="text-slate-500">×</span> <br class="hidden sm:inline"/>
-            <span class="bg-gradient-to-r from-golf-emerald via-teal-300 to-golf-gold bg-clip-text text-transparent">揮桿美學</span> 
-            <span class="text-slate-500">×</span> 自媒體風格
-          </h1>
-
-          <p class="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
-            結合臨床心理學的賽事心態控管，與運動科學的揮桿軌跡解構。從 TrackMan 擊球數據分析到短影音爆款視覺企劃，開啟高爾夫的新世代想像。
-          </p>
-
-          <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <a href="#analytics" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-golf-emerald to-emerald-600 text-slate-950 font-bold shadow-xl shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-0.5 transition-all text-center">
-              <i class="fa-solid fa-calculator mr-2"></i> 揮桿數據試算
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-golf-dark/90 backdrop-blur border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-amber-400 flex items-center justify-center font-bold text-slate-900 text-xl shadow-lg shadow-emerald-500/20">
+                    C
+                </div>
+                <span class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-slate-200 to-emerald-400 bg-clip-text text-transparent">CHESTER GOLF</span>
             </a>
-            <a href="#media" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-slate-200 font-semibold hover:text-white hover:bg-slate-800/80 transition-all text-center">
-              <i class="fa-solid fa-play mr-2 text-golf-gold"></i> 探索觀看影音
-            </a>
-          </div>
-
-          <!-- Quick Stats Bar -->
-          <div class="pt-10 grid grid-cols-3 gap-4 border-t border-golf-border/60 max-w-lg mx-auto lg:mx-0">
-            <div>
-              <div class="text-2xl sm:text-3xl font-black text-white">112 <span class="text-sm font-normal text-slate-400">mph</span></div>
-              <div class="text-xs text-slate-400 mt-1">1號木桿頭速度</div>
-            </div>
-            <div>
-              <div class="text-2xl sm:text-3xl font-black text-golf-gold">1.48</div>
-              <div class="text-xs text-slate-400 mt-1">擊球效率 (Smash)</div>
-            </div>
-            <div>
-              <div class="text-2xl sm:text-3xl font-black text-golf-emerald">200K+</div>
-              <div class="text-xs text-slate-400 mt-1">社群影音總觀看</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right Visual Showcase / Profile Card -->
-        <div class="lg:col-span-5 flex justify-center">
-          <div class="relative w-full max-w-md">
-            <div class="absolute inset-0 bg-gradient-to-tr from-golf-emerald/20 to-golf-gold/20 rounded-3xl blur-2xl transform rotate-3"></div>
             
-            <div class="relative glass-card rounded-3xl p-6 sm:p-8 space-y-6 gold-glow border-golf-border">
-              <div class="flex items-center justify-between">
-                <span class="px-3 py-1 rounded-full text-xs font-bold bg-golf-gold/20 text-golf-gold border border-golf-gold/30">
-                  <i class="fa-solid fa-crown text-xs mr-1"></i> CHESTER BRAND
-                </span>
-                <span class="text-xs text-slate-400"><i class="fa-solid fa-location-dot mr-1"></i> 台北 / 輔仁大學</span>
-              </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-emerald-400 transition">關於 Chester</a>
+                <a href="#calculator" class="text-slate-300 hover:text-emerald-400 transition">揮桿數據分析</a>
+                <a href="#content" class="text-slate-300 hover:text-emerald-400 transition">精選內容</a>
+                <a href="#contact" class="text-slate-300 hover:text-emerald-400 transition">聯絡合作</a>
+            </nav>
 
-              <!-- Avatar Concept Container -->
-              <div class="relative h-64 rounded-2xl bg-gradient-to-b from-slate-800 to-golf-dark overflow-hidden flex flex-col items-center justify-center border border-slate-700/50 group">
-                <div class="absolute inset-0 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
-                <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-emerald-500 to-golf-gold p-1 mb-3 shadow-xl">
-                  <div class="w-full h-full rounded-full bg-slate-900 flex items-center justify-center text-4xl text-golf-emerald font-black">
-                    CG
-                  </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="https://instagram.com" target="_blank" class="text-slate-400 hover:text-pink-500 transition text-lg"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://tiktok.com" target="_blank" class="text-slate-400 hover:text-white transition text-lg"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://youtube.com" target="_blank" class="text-slate-400 hover:text-red-500 transition text-lg"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-24 overflow-hidden border-b border-slate-800/80">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/20 via-golf-dark to-golf-dark"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-6">
+                Data-Driven Golf Science
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight mb-6 leading-tight">
+                解構揮桿機制，<br class="hidden sm:inline"><span class="bg-gradient-to-r from-emerald-400 to-amber-300 bg-clip-text text-transparent">用數據重塑你的高爾夫體驗</span>
+            </h1>
+            <p class="max-w-2xl mx-auto text-slate-400 text-lg sm:text-xl mb-10 font-light">
+                融合心理學洞察與運動科學，突破傳統教學框架。從擊球效率（Smash Factor）到彈道分析，帶你精準掌握每一次揮桿。
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#calculator" class="px-8 py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-600 text-slate-950 transition shadow-lg shadow-emerald-500/25 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>體驗數據計算機</span>
+                </a>
+                <a href="#content" class="px-8 py-3.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-play"></i>
+                    <span>探索影音內容</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 border-b border-slate-800/80 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-emerald-400 font-bold tracking-wider uppercase text-sm">About Chester Golf</span>
+                    <h2 class="text-3xl font-extrabold text-white">結合運動科學、數據與短影音創意的個人品牌</h2>
+                    <p class="text-slate-300 leading-relaxed">
+                        歡迎來到 <strong>Chester Golf</strong>。這裡是一個結合運動科學、數據分析與短影音內容的高爾夫個人品牌空間。我們相信，精準的揮桿不僅來自重複的練習，更源於對力學機制的深刻理解。
+                    </p>
+                    <p class="text-slate-300 leading-relaxed">
+                        透過結合現代科技（如 Launch Monitor 數據測量與追蹤系統），我們打破傳統高爾夫教學的模糊感，將複雜的桿頭速度、擊球效率（Smash Factor）與彈道軌跡化為清晰可見的數位指標。
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800">
+                        <div>
+                            <div class="text-2xl font-black text-amber-400">200K+</div>
+                            <div class="text-xs text-slate-400 mt-1">TikTok 最高流量</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-black text-emerald-400">1.45+</div>
+                            <div class="text-xs text-slate-400 mt-1">目標 Smash Factor</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-black text-cyan-400">100%</div>
+                            <div class="text-xs text-slate-400 mt-1">數據科學分析</div>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-2xl font-bold text-white">吳孟桓 Chester</h3>
-                <p class="text-xs text-slate-400 mt-1">高爾夫運動創作者 × 心理學研究</p>
-                <div class="mt-3 flex gap-2">
-                  <span class="px-2.5 py-0.5 rounded bg-slate-800 text-[11px] text-slate-300">CapCut 剪輯大師</span>
-                  <span class="px-2.5 py-0.5 rounded bg-slate-800 text-[11px] text-slate-300">排球系隊先發</span>
+                <div class="bg-golf-card p-8 rounded-2xl border border-slate-800 shadow-2xl relative">
+                    <div class="absolute -top-3 -right-3 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl"></div>
+                    <h3 class="text-xl font-bold mb-6 text-emerald-400 flex items-center space-x-2">
+                        <i class="fa-solid fa-bullseye"></i>
+                        <span>Chester Golf 三大核心</span>
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold text-slate-100">運動力學與數據化</h4>
+                                <p class="text-sm text-slate-400 mt-1">拒絕憑感覺打球，用正確的數據建立可重複的穩健揮桿模式。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold text-slate-100">心理素質與賽場表現</h4>
+                                <p class="text-sm text-slate-400 mt-1">結合臨床心理背景，解析在高壓環境下的抗壓心態與專注調節。</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0 font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold text-slate-100">高質感短影音呈現</h4>
+                                <p class="text-sm text-slate-400 mt-1">精緻腳本與專業後製，將艱深的揮桿技術轉化為輕鬆易懂的自媒體內容。</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+            </div>
+        </div>
+    </section>
 
-              <!-- Highlights -->
-              <div class="space-y-3 text-xs text-slate-300">
-                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                  <span class="flex items-center gap-2">
-                    <i class="fa-solid fa-brain text-golf-emerald"></i> 運動心理學調適
-                  </span>
-                  <span class="font-bold text-emerald-400">心律/專注優化</span>
+    <!-- Swing Calculator Section -->
+    <section id="calculator" class="py-20 border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-extrabold text-white mb-4">即時揮桿數據與距離演算器</h2>
+                <p class="text-slate-400">輸入你的桿頭速度與擊球參數，系統將自動演算預估飛擊距離 (Carry Distance) 與 AI 動作診斷建議。</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Input Panel -->
+                <div class="lg:col-span-5 bg-golf-card p-6 rounded-2xl border border-slate-800 space-y-6">
+                    <h3 class="text-lg font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center space-x-2">
+                        <i class="fa-solid fa-sliders text-emerald-400"></i>
+                        <span>參數設定</span>
+                    </h3>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">選擇球桿類型</label>
+                        <select id="clubType" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500">
+                            <option value="driver">1號木桿 (Driver)</option>
+                            <option value="wood3">3號木桿 (3-Wood)</option>
+                            <option value="iron7">7號鐵桿 (7-Iron)</option>
+                            <option value="pw">Pitching Wedge (PW)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-slate-300 font-medium">桿頭速度 (Club Speed)</span>
+                            <span class="text-emerald-400 font-bold"><span id="speedVal">95</span> mph</span>
+                        </div>
+                        <input type="range" id="clubSpeed" min="60" max="130" value="95" class="w-full accent-emerald-500 bg-slate-900 rounded-lg cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-slate-300 font-medium">擊球效率 (Smash Factor)</span>
+                            <span class="text-amber-400 font-bold" id="smashVal">1.45</span>
+                        </div>
+                        <input type="range" id="smashFactor" min="1.10" max="1.52" step="0.01" value="1.45" class="w-full accent-amber-500 bg-slate-900 rounded-lg cursor-pointer">
+                    </div>
+
+                    <button onclick="calculateSwing()" class="w-full py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-600 text-slate-950 transition shadow-lg shadow-emerald-500/20">
+                        重新計算與診斷
+                    </button>
                 </div>
-                <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-                  <span class="flex items-center gap-2">
-                    <i class="fa-solid fa-video text-golf-gold"></i> 短影音企劃剪輯
-                  </span>
-                  <span class="font-bold text-amber-400">爆款邏輯運用</span>
+
+                <!-- Result Panel -->
+                <div class="lg:col-span-7 bg-golf-card p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-200 border-b border-slate-800 pb-3 flex items-center space-x-2 mb-6">
+                            <i class="fa-solid fa-chart-line text-amber-400"></i>
+                            <span>預估飛擊數據</span>
+                        </h3>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800">
+                                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">預估飛擊距離 (Carry)</div>
+                                <div class="text-3xl font-black text-emerald-400"><span id="resCarry">240</span> <span class="text-sm font-normal text-slate-400">碼 (Yds)</span></div>
+                            </div>
+                            <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800">
+                                <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">球速 (Ball Speed)</div>
+                                <div class="text-3xl font-black text-amber-400"><span id="resBallSpeed">137.8</span> <span class="text-sm font-normal text-slate-400">mph</span></div>
+                            </div>
+                        </div>
+
+                        <!-- AI Diagnosis Box -->
+                        <div class="bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-5 mb-4">
+                            <div class="text-sm font-bold text-emerald-400 mb-2 flex items-center space-x-2">
+                                <i class="fa-solid fa-robot"></i>
+                                <span>Chester AI 揮桿診斷建議</span>
+                            </div>
+                            <p id="aiAdvice" class="text-sm text-slate-300 leading-relaxed">
+                                你的 Smash Factor 表現優異，能量傳遞效率非常高！建議保持當前擊球點，可微調發射角以追求最佳滾動距離。
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-slate-500 text-center">
+                        * 本數據採用標準大氣壓與海平面彈道模型演算，實際表現將受風速與場地環境影響。
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ==================== ABOUT SECTION ==================== -->
-  <section id="about" class="py-20 bg-slate-950/60 border-t border-golf-border relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto space-y-4">
-        <h2 class="text-xs uppercase tracking-widest text-golf-emerald font-bold">About The Creator</h2>
-        <h3 class="text-3xl sm:text-4xl font-extrabold text-white">跨界心理學與高爾夫運動科學</h3>
-        <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-          就讀輔仁大學臨床心理學系，我將對「人際情緒、大腦專注力與壓力控制」的理解，延伸至高爾夫這項極度考驗心理素質的運動。透過科技數據分析與質感影音紀錄，分享高爾夫最真實的魅力。
-        </p>
-      </div>
-
-      <!-- Feature Grid -->
-      <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="glass-card rounded-2xl p-8 space-y-4 hover:border-golf-emerald/50 transition-all group">
-          <div class="w-14 h-14 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-golf-emerald text-2xl group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-brain"></i>
-          </div>
-          <h4 class="text-xl font-bold text-white">心理賽事應對 (Mental Game)</h4>
-          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-            運用臨床心理學視角，解析下場時面對沙坑、水障礙與推桿壓力時的呼吸調整與焦點重構策略。
-          </p>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="glass-card rounded-2xl p-8 space-y-4 hover:border-golf-gold/50 transition-all group">
-          <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-golf-gold text-2xl group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-chart-line"></i>
-          </div>
-          <h4 class="text-xl font-bold text-white">數據力學拆解 (Swing Science)</h4>
-          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-            拒絕盲目練習！分析桿頭速度、攻擊角度 (AoA) 與 Smash Factor，尋找最適合個人體能的最佳揮桿節奏。
-          </p>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="glass-card rounded-2xl p-8 space-y-4 hover:border-golf-emerald/50 transition-all group">
-          <div class="w-14 h-14 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-golf-emerald text-2xl group-hover:scale-110 transition-transform">
-            <i class="fa-solid fa-film"></i>
-          </div>
-          <h4 class="text-xl font-bold text-white">質感自媒體視覺 (Content Creation)</h4>
-          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-            熟練掌握 CapCut 節奏剪輯與鏡頭語言，將枯燥的訓練轉化為抖音 20 萬+ 觀看的吸引力短影音。
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== SWING ANALYTICS CALCULATOR ==================== -->
-  <section id="analytics" class="py-20 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
-        <span class="px-3 py-1 rounded-full text-xs font-bold bg-golf-gold/20 text-golf-gold border border-golf-gold/30">
-          <i class="fa-solid fa-bolt mr-1"></i> Interactive Tool
-        </span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">揮桿數據與擊球距離計算器</h2>
-        <p class="text-slate-400 text-sm sm:text-base">
-          輸入你的球桿選用與揮桿參數，系統將即時計算預估飛擊距離 (Carry Distance) 並給予 AI 揮桿優化建議。
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <!-- Inputs Column -->
-        <div class="lg:col-span-5 glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-          <h3 class="text-lg font-bold text-white flex items-center gap-2 border-b border-slate-800 pb-4">
-            <i class="fa-solid fa-sliders text-golf-emerald"></i> 揮桿參數輸入
-          </h3>
-
-          <!-- Club Selection -->
-          <div class="space-y-2">
-            <label class="block text-xs font-semibold text-slate-300">選擇球桿 (Club Selection)</label>
-            <select id="calc-club" onchange="calculateSwingStats()" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-golf-emerald transition-all">
-              <option value="driver">1號木桿 (Driver)</option>
-              <option value="iron7">7號鐵桿 (7-Iron)</option>
-              <option value="pw">Pitching Wedge (PW)</option>
-            </select>
-          </div>
-
-          <!-- Club Head Speed Slider -->
-          <div class="space-y-2">
-            <div class="flex justify-between text-xs">
-              <span class="font-semibold text-slate-300">桿頭速度 (Club Speed)</span>
-              <span id="speed-val" class="font-bold text-golf-emerald text-sm">100 mph</span>
-            </div>
-            <input type="range" id="calc-speed" min="50" max="130" value="100" oninput="calculateSwingStats()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500">
-            <div class="flex justify-between text-[10px] text-slate-500">
-              <span>50 mph</span>
-              <span>90 mph</span>
-              <span>130 mph</span>
-            </div>
-          </div>
-
-          <!-- Smash Factor Slider -->
-          <div class="space-y-2">
-            <div class="flex justify-between text-xs">
-              <span class="font-semibold text-slate-300">擊球效率 (Smash Factor)</span>
-              <span id="smash-val" class="font-bold text-golf-gold text-sm">1.45</span>
-            </div>
-            <input type="range" id="calc-smash" min="1.10" max="1.52" step="0.01" value="1.45" oninput="calculateSwingStats()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500">
-            <div class="flex justify-between text-[10px] text-slate-500">
-              <span>1.10 (失誤)</span>
-              <span>1.40 (標準)</span>
-              <span>1.50+ (完美)</span>
-            </div>
-          </div>
-
-          <!-- Launch Angle Slider -->
-          <div class="space-y-2">
-            <div class="flex justify-between text-xs">
-              <span class="font-semibold text-slate-300">發射角度 (Launch Angle)</span>
-              <span id="launch-val" class="font-bold text-teal-400 text-sm">13.5°</span>
-            </div>
-            <input type="range" id="calc-launch" min="8.0" max="25.0" step="0.5" value="13.5" oninput="calculateSwingStats()" class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-teal-400">
-          </div>
-        </div>
-
-        <!-- Calculated Output Column -->
-        <div class="lg:col-span-7 space-y-6">
-          <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 border-golf-emerald/30 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
-
-            <h3 class="text-lg font-bold text-white flex items-center justify-between border-b border-slate-800 pb-4">
-              <span class="flex items-center gap-2">
-                <i class="fa-solid fa-chart-pie text-golf-gold"></i> 實時數據模擬結果
-              </span>
-              <span class="text-xs font-normal text-slate-400">TrackMan 演算模型</span>
-            </h3>
-
-            <!-- Grid Display -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-center">
-                <div class="text-[11px] text-slate-400 mb-1">球速 (Ball Speed)</div>
-                <div id="res-ballspeed" class="text-2xl font-black text-white">145</div>
-                <div class="text-[10px] text-slate-500">mph</div>
-              </div>
-
-              <div class="bg-slate-900/80 border border-emerald-500/30 rounded-2xl p-4 text-center bg-emerald-950/20">
-                <div class="text-[11px] text-golf-emerald mb-1">預估飛擊 (Carry)</div>
-                <div id="res-carry" class="text-3xl font-black text-golf-emerald">252</div>
-                <div class="text-[10px] text-slate-400">Yards</div>
-              </div>
-
-              <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-center">
-                <div class="text-[11px] text-slate-400 mb-1">總距離 (Total)</div>
-                <div id="res-total" class="text-2xl font-black text-white">275</div>
-                <div class="text-[10px] text-slate-500">Yards</div>
-              </div>
-
-              <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 text-center">
-                <div class="text-[11px] text-slate-400 mb-1">頂點高度 (Peak)</div>
-                <div id="res-height" class="text-2xl font-black text-white">31</div>
-                <div class="text-[10px] text-slate-500">Yards</div>
-              </div>
+    <!-- Content Feed Section -->
+    <section id="content" class="py-20 border-b border-slate-800/80 bg-slate-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-white mb-2">精選短影音與文章專區</h2>
+                    <p class="text-slate-400">實測數據、揮桿機制拆解與高品質教學短片。</p>
+                </div>
             </div>
 
-            <!-- AI Coaching Tip Box -->
-            <div class="p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-golf-dark border border-golf-gold/30 space-y-2">
-              <div class="flex items-center gap-2 text-xs font-bold text-golf-gold">
-                <i class="fa-solid fa-robot"></i> Chester AI 揮桿診斷建議
-              </div>
-              <p id="ai-coaching-tip" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                數據載入中...
-              </p>
+            <!-- Content Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-golf-card rounded-2xl border border-slate-800 overflow-hidden hover:border-slate-700 transition">
+                    <div class="h-48 bg-slate-800 flex items-center justify-center relative">
+                        <i class="fa-solid fa-golf-ball-tee text-5xl text-emerald-500/40"></i>
+                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-xs font-bold px-2.5 py-1 rounded text-emerald-400 border border-slate-700">短影音</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-slate-100 mb-2">如何在 30 天內提升 5 mph 桿頭速度？</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">解析地面反應力（GRF）與核心旋轉鏈的搭配，打造不費力的暴飛揮桿。</p>
+                        <div class="flex items-center justify-between text-xs text-slate-500 border-t border-slate-800/80 pt-4">
+                            <span><i class="fa-solid fa-eye mr-1"></i> 200k+ 觀看</span>
+                            <span class="text-emerald-400">看影片 <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-golf-card rounded-2xl border border-slate-800 overflow-hidden hover:border-slate-700 transition">
+                    <div class="h-48 bg-slate-800 flex items-center justify-center relative">
+                        <i class="fa-solid fa-chart-pie text-5xl text-amber-500/40"></i>
+                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-xs font-bold px-2.5 py-1 rounded text-amber-400 border border-slate-700">數據實測</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-slate-100 mb-2">Smash Factor 1.35 vs 1.48 的距離差異到底有多大？</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">用 Launch Monitor 精準對比甜蜜點擊球與偏心擊球的實際距離損失。</p>
+                        <div class="flex items-center justify-between text-xs text-slate-500 border-t border-slate-800/80 pt-4">
+                            <span><i class="fa-solid fa-eye mr-1"></i> 10k+ 觀看</span>
+                            <span class="text-emerald-400">閱讀分析 <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-golf-card rounded-2xl border border-slate-800 overflow-hidden hover:border-slate-700 transition">
+                    <div class="h-48 bg-slate-800 flex items-center justify-center relative">
+                        <i class="fa-solid fa-brain text-5xl text-cyan-500/40"></i>
+                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-xs font-bold px-2.5 py-1 rounded text-cyan-400 border border-slate-700">運動心理</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-lg text-slate-100 mb-2">站在第 1 洞 T-Box 的緊張感該如何破解？</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">臨床心理學實用專注技巧：Pre-shot Routine（擊球前準備流程）的建立。</p>
+                        <div class="flex items-center justify-between text-xs text-slate-500 border-t border-slate-800/80 pt-4">
+                            <span><i class="fa-solid fa-eye mr-1"></i> 5k+ 閱讀</span>
+                            <span class="text-emerald-400">閱讀全文 <i class="fa-solid fa-arrow-right ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ==================== FEATURED MEDIA / CONTENT FEED ==================== -->
-  <section id="media" class="py-20 bg-slate-950/60 border-t border-golf-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div class="space-y-2">
-          <h2 class="text-xs uppercase tracking-widest text-golf-emerald font-bold">Featured Content</h2>
-          <h3 class="text-3xl sm:text-4xl font-extrabold text-white">影音創作與擊球教學企劃</h3>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 border-b border-slate-800/80">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-extrabold text-white mb-4">聯絡 Chester / 合作諮詢</h2>
+            <p class="text-slate-400 mb-8">無論是品牌合作、影音企劃，或是球具評測諮詢，歡迎填寫表單與我聯繫！</p>
+
+            <form onsubmit="handleContact(event)" class="bg-golf-card p-8 rounded-2xl border border-slate-800 space-y-6 text-left">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">姓名 / 稱呼</label>
+                        <input type="text" required placeholder="請輸入您的名字" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Email 信箱</label>
+                        <input type="email" required placeholder="example@gmail.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-300 mb-2">訊息內容</label>
+                    <textarea rows="4" required placeholder="請輸入您的合作想法或問題..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-600 text-slate-950 transition shadow-lg shadow-emerald-500/20">
+                    發送訊息
+                </button>
+            </form>
         </div>
+    </section>
 
-        <!-- Filter Buttons -->
-        <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0">
-          <button onclick="filterMedia('all')" id="btn-filter-all" class="media-filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-golf-emerald text-slate-950 transition-all whitespace-nowrap">全部企劃</button>
-          <button onclick="filterMedia('shorts')" id="btn-filter-shorts" class="media-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all whitespace-nowrap">爆款短影音</button>
-          <button onclick="filterMedia('mechanics')" id="btn-filter-mechanics" class="media-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all whitespace-nowrap">揮桿機制</button>
-          <button onclick="filterMedia('tech')" id="btn-filter-tech" class="media-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all whitespace-nowrap">高爾夫科技</button>
+    <!-- Footer -->
+    <footer class="py-8 bg-golf-dark mt-auto border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500 text-sm">
+            <p>© 2026 Chester Golf. All rights reserved. Built with Passion & Data Science.</p>
         </div>
-      </div>
+    </footer>
 
-      <!-- Media Cards Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="media-grid">
-        <!-- Card 1 -->
-        <div class="media-card glass-card rounded-2xl overflow-hidden hover:-translate-y-1 transition-all group" data-category="shorts">
-          <div class="relative h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10"></div>
-            <i class="fa-brands fa-tiktok text-6xl text-slate-700 group-hover:scale-110 group-hover:text-golf-emerald transition-all"></i>
-            <span class="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-md text-[10px] font-bold bg-pink-600/80 text-white">TikTok 爆款</span>
-            <span class="absolute bottom-3 right-3 z-20 text-xs font-semibold text-slate-300"><i class="fa-solid fa-eye mr-1"></i> 200,000+</span>
-          </div>
-          <div class="p-6 space-y-3">
-            <h4 class="text-base font-bold text-white group-hover:text-golf-emerald transition-colors">前 3 秒抓住眼球！高爾夫短影音爆款企劃術</h4>
-            <p class="text-xs text-slate-400 line-clamp-2">運用心理學 Hook 技巧結合 CapCut 快節奏踩點剪輯，把枯燥的練習場練習剪成流暢視覺作品。</p>
-            <div class="pt-2 flex justify-between items-center text-xs text-slate-500 border-t border-slate-800">
-              <span>CapCut 後製秘訣</span>
-              <a href="#" onclick="alert('開啟社群影片預覽'); return false;" class="text-golf-gold hover:underline font-semibold">觀看作品 <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
-            </div>
-          </div>
-        </div>
+    <!-- Interactive JS Logic -->
+    <script>
+        const speedInput = document.getElementById('clubSpeed');
+        const smashInput = document.getElementById('smashFactor');
+        const speedVal = document.getElementById('speedVal');
+        const smashVal = document.getElementById('smashVal');
 
-        <!-- Card 2 -->
-        <div class="media-card glass-card rounded-2xl overflow-hidden hover:-translate-y-1 transition-all group" data-category="mechanics">
-          <div class="relative h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10"></div>
-            <i class="fa-solid fa-video text-6xl text-slate-700 group-hover:scale-110 group-hover:text-golf-gold transition-all"></i>
-            <span class="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-md text-[10px] font-bold bg-amber-500/80 text-slate-950">揮桿機制</span>
-            <span class="absolute bottom-3 right-3 z-20 text-xs font-semibold text-slate-300"><i class="fa-solid fa-eye mr-1"></i> 15,000+</span>
-          </div>
-          <div class="p-6 space-y-3">
-            <h4 class="text-base font-bold text-white group-hover:text-golf-emerald transition-colors">1號木桿增加 20 碼的轉體密碼</h4>
-            <p class="text-xs text-slate-400 line-clamp-2">拆解下桿時骨盆旋轉與手臂延伸的肌肉記憶，解決切球 (Slice) 的核心問題。</p>
-            <div class="pt-2 flex justify-between items-center text-xs text-slate-500 border-t border-slate-800">
-              <span>慢動作解析</span>
-              <a href="#" onclick="alert('開啟社群影片預覽'); return false;" class="text-golf-gold hover:underline font-semibold">觀看作品 <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
-            </div>
-          </div>
-        </div>
+        speedInput.addEventListener('input', (e) => {
+            speedVal.textContent = e.target.value;
+            calculateSwing();
+        });
 
-        <!-- Card 3 -->
-        <div class="media-card glass-card rounded-2xl overflow-hidden hover:-translate-y-1 transition-all group" data-category="tech">
-          <div class="relative h-48 bg-slate-800 flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-10"></div>
-            <i class="fa-solid fa-microchip text-6xl text-slate-700 group-hover:scale-110 group-hover:text-teal-400 transition-all"></i>
-            <span class="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-md text-[10px] font-bold bg-teal-500/80 text-slate-950">高爾夫科技</span>
-            <span class="absolute bottom-3 right-3 z-20 text-xs font-semibold text-slate-300"><i class="fa-solid fa-eye mr-1"></i> 12,000+</span>
-          </div>
-          <div class="p-6 space-y-3">
-            <h4 class="text-base font-bold text-white group-hover:text-golf-emerald transition-colors">TrackMan 數據不藏私開箱評測</h4>
-            <p class="text-xs text-slate-400 line-clamp-2">帶你看懂 Smash Factor 與 Spin Rate 如何影響落點，打造屬於你的數據化練球清單。</p>
-            <div class="pt-2 flex justify-between items-center text-xs text-slate-500 border-t border-slate-800">
-              <span>雷達數據專題</span>
-              <a href="#" onclick="alert('開啟社群影片預覽'); return false;" class="text-golf-gold hover:underline font-semibold">觀看作品 <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        smashInput.addEventListener('input', (e) => {
+            smashVal.textContent = e.target.value;
+            calculateSwing();
+        });
 
-  <!-- ==================== CONTACT / COOPERATION ==================== -->
-  <section id="contact" class="py-20 relative">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="glass-card rounded-3xl p-8 sm:p-12 border-golf-emerald/30 shadow-2xl space-y-8 relative overflow-hidden">
-        <div class="text-center space-y-3">
-          <span class="px-3 py-1 rounded-full text-xs font-bold bg-golf-emerald/20 text-golf-emerald border border-golf-emerald/30">
-            Let's Collaborate
-          </span>
-          <h2 class="text-3xl font-extrabold text-white">品牌合作與媒體洽詢</h2>
-          <p class="text-slate-400 text-xs sm:text-sm max-w-lg mx-auto">
-            不論是高爾夫裝備代言、短影音行銷企劃、教練專案合作或賽事主持，歡迎留下訊息！
-          </p>
-        </div>
+        document.getElementById('clubType').addEventListener('change', calculateSwing);
 
-        <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div class="space-y-2">
-              <label class="block text-xs font-semibold text-slate-300">您的姓名 / 單位</label>
-              <input type="text" required placeholder="例如：王小明 / Chester Sports" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-golf-emerald transition-all">
-            </div>
-            <div class="space-y-2">
-              <label class="block text-xs font-semibold text-slate-300">電子信箱 (Email)</label>
-              <input type="email" required placeholder="name@example.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-golf-emerald transition-all">
-            </div>
-          </div>
+        function calculateSwing() {
+            const speed = parseFloat(speedInput.value);
+            const smash = parseFloat(smashInput.value);
+            const club = document.getElementById('clubType').value;
 
-          <div class="space-y-2">
-            <label class="block text-xs font-semibold text-slate-300">合作類型 (Cooperation Type)</label>
-            <select class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-golf-emerald transition-all">
-              <option value="brand">品牌代言與裝備開箱</option>
-              <option value="video">短影音企劃與剪輯外包</option>
-              <option value="event">賽事 / 活動主持邀請</option>
-              <option value="other">其他交流與合作</option>
-            </select>
-          </div>
+            // Ball Speed = Club Speed * Smash Factor
+            const ballSpeed = speed * smash;
 
-          <div class="space-y-2">
-            <label class="block text-xs font-semibold text-slate-300">訊息內容 (Message)</label>
-            <textarea rows="4" required placeholder="請簡述您的合作想法或預計時間..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-golf-emerald transition-all"></textarea>
-          </div>
+            // Distance Multipliers depending on club
+            let multiplier = 2.3;
+            if (club === 'wood3') multiplier = 2.1;
+            if (club === 'iron7') multiplier = 1.75;
+            if (club === 'pw') multiplier = 1.35;
 
-          <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-golf-emerald to-emerald-600 text-slate-950 font-extrabold hover:shadow-lg hover:shadow-emerald-500/30 transition-all active:scale-[0.99]">
-            <i class="fa-solid fa-paper-plane mr-2"></i> 發送合作洽詢訊息
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
+            const carry = Math.round((ballSpeed * multiplier) * (smash / 1.45));
 
-  <!-- Toast Notification -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 max-w-sm w-full bg-slate-900 border border-golf-emerald/50 p-4 rounded-2xl shadow-2xl flex items-center gap-3">
-    <div class="w-10 h-10 rounded-xl bg-golf-emerald/20 flex items-center justify-center text-golf-emerald text-xl">
-      <i class="fa-solid fa-circle-check"></i>
-    </div>
-    <div>
-      <h5 class="text-sm font-bold text-white">訊息已順利發送！</h5>
-      <p class="text-xs text-slate-400">感謝您的聯絡，Chester 將於 24 小時內回覆。</p>
-    </div>
-  </div>
+            document.getElementById('resBallSpeed').textContent = ballSpeed.toFixed(1);
+            document.getElementById('resCarry').textContent = carry;
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="mt-auto bg-slate-950 border-t border-golf-border py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center space-x-3">
-        <div class="w-8 h-8 rounded-lg bg-golf-emerald flex items-center justify-center text-slate-950 font-bold">
-          <i class="fa-solid fa-golf-ball-tee"></i>
-        </div>
-        <span class="text-base font-bold text-white tracking-wider">CHESTER GOLF</span>
-      </div>
-
-      <!-- Social Media Links -->
-      <div class="flex space-x-6 text-slate-400 text-lg">
-        <a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-pink-500 transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://youtube.com" target="_blank" rel="noopener" class="hover:text-red-500 transition-colors" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://tiktok.com" target="_blank" rel="noopener" class="hover:text-golf-emerald transition-colors" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-        <a href="mailto:leetroom1388@gmail.com" class="hover:text-golf-gold transition-colors" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-      </div>
-
-      <p class="text-xs text-slate-500">
-        © 2026 Chester Golf. All rights reserved. Built with Sports Science & Precision.
-      </p>
-    </div>
-  </footer>
-
-  <!-- ==================== JAVASCRIPT LOGIC ==================== -->
-  <script>
-    // Mobile Menu Toggle
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
-    }
-    document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
-
-    // Filter Media Cards
-    function filterMedia(category) {
-      document.querySelectorAll('.media-filter-btn').forEach(btn => {
-        btn.classList.remove('bg-golf-emerald', 'text-slate-950');
-        btn.classList.add('bg-slate-800', 'text-slate-300');
-      });
-
-      const activeBtn = document.getElementById(`btn-filter-${category}`);
-      if (activeBtn) {
-        activeBtn.classList.remove('bg-slate-800', 'text-slate-300');
-        activeBtn.classList.add('bg-golf-emerald', 'text-slate-950');
-      }
-
-      const cards = document.querySelectorAll('.media-card');
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+            // AI Diagnostics
+            const aiAdvice = document.getElementById('aiAdvice');
+            if (smash >= 1.48) {
+                aiAdvice.textContent = "完美甜蜜點擊球！你的 Smash Factor 達到職業水準，能量傳遞極佳！保持當前的揮桿節奏。";
+            } else if (smash >= 1.40) {
+                aiAdvice.textContent = "表現非常穩健！擊球點稍微偏離完美甜蜜點，若能微調觸球角度，飛擊距離可再提升 10~15 碼。";
+            } else {
+                aiAdvice.textContent = "力量傳遞效率偏低，可能存在甜點偏移或觸球桿面過開/過關的問題。建議先降低 5% 揮桿力量以求穩定甜蜜點。";
+            }
         }
-      });
-    }
 
-    // Swing Analytics Live Calculation
-    function calculateSwingStats() {
-      const club = document.getElementById('calc-club').value;
-      const speed = parseFloat(document.getElementById('calc-speed').value);
-      const smash = parseFloat(document.getElementById('calc-smash').value);
-      const launch = parseFloat(document.getElementById('calc-launch').value);
+        function handleContact(e) {
+            e.preventDefault();
+            alert('感謝您的訊息！Chester 會在收到後盡快與您聯繫。');
+            e.target.reset();
+        }
 
-      // UI Slider values update
-      document.getElementById('speed-val').innerText = `${speed} mph`;
-      document.getElementById('smash-val').innerText = smash.toFixed(2);
-      document.getElementById('launch-val').innerText = `${launch.toFixed(1)}°`;
-
-      // Ball Speed Calculation
-      const ballSpeed = speed * smash;
-
-      // Distance Coefficient based on club type
-      let distanceFactor = 1.75;
-      let rollBonus = 1.09;
-      
-      if (club === 'iron7') {
-        distanceFactor = 1.35;
-        rollBonus = 1.03;
-      } else if (club === 'pw') {
-        distanceFactor = 1.05;
-        rollBonus = 1.01;
-      }
-
-      // Launch angle modifier
-      const launchDiff = Math.abs(launch - 13.5);
-      const launchModifier = 1 - (launchDiff * 0.008);
-
-      const carry = Math.round(ballSpeed * distanceFactor * launchModifier);
-      const total = Math.round(carry * rollBonus);
-      const height = Math.round(speed * 0.28 + (launch * 0.4));
-
-      // Update Outputs
-      document.getElementById('res-ballspeed').innerText = Math.round(ballSpeed);
-      document.getElementById('res-carry').innerText = carry;
-      document.getElementById('res-total').innerText = total;
-      document.getElementById('res-height').innerText = height;
-
-      // AI Coaching Advice Feedback Generator
-      const tipBox = document.getElementById('ai-coaching-tip');
-      let tip = "";
-
-      if (smash >= 1.48) {
-        tip = `🔥 <b>完美甜蜜點擊球！</b> Smash Factor 達到 ${smash.toFixed(2)}，能量傳遞效率極高。建議維持當前的擺幅節奏與重心轉移軌跡。`;
-      } else if (smash < 1.38 && club === 'driver') {
-        tip = `⚠️ <b>擊球未觸及甜蜜點。</b> Smash Factor 僅 ${smash.toFixed(2)}，代表觸球位置偏離桿面中心。建議透過揮桿慢動作檢視站姿距離與桿頭進球角度 (AoA)。`;
-      } else if (speed > 105) {
-        tip = `🚀 <b>高階桿頭速度！</b> 105+ mph 的速域代表爆發力十足，搭配適當發射角 (12°-14°) 可輕鬆解鎖 270+ Yards 飛擊距離。`;
-      } else {
-        tip = `💡 <b>節奏穩定運作中。</b> 當前揮桿節奏順暢，若想增加距離，可嘗試著重下半身轉體的順序 (Kinematic Sequence) 帶動鞭打效果。`;
-      }
-
-      tipBox.innerHTML = tip;
-    }
-
-    // Contact Form Handler & Toast
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      
-      // Trigger confetti
-      confetti({
-        particleCount: 60,
-        spread: 70,
-        origin: { y: 0.8 }
-      });
-
-      // Show Toast
-      const toast = document.getElementById('toast');
-      toast.classList.remove('translate-y-20', 'opacity-0');
-      
-      setTimeout(() => {
-        toast.classList.add('translate-y-20', 'opacity-0');
-      }, 4000);
-
-      document.getElementById('contact-form').reset();
-    }
-
-    // Initial calculation on load
-    window.onload = function() {
-      calculateSwingStats();
-    };
-  </script>
+        // Initialize calculation on page load
+        calculateSwing();
+    </script>
 </body>
 </html>
