@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chester Golf｜數據驅動的高爾夫品牌</title>
+    <title>Chester Golf｜數據驅動的高爾夫品牌 & 中古選品</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -25,6 +25,8 @@
     </script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti for Celebration -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body class="bg-golf-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
@@ -39,79 +41,212 @@
             </a>
             
             <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#store" class="text-emerald-400 hover:text-emerald-300 font-bold transition">🔥 現貨全套桿</a>
                 <a href="#about" class="text-slate-300 hover:text-emerald-400 transition">關於 Chester</a>
                 <a href="#calculator" class="text-slate-300 hover:text-emerald-400 transition">揮桿數據分析</a>
-                <a href="#content" class="text-slate-300 hover:text-emerald-400 transition">精選內容</a>
                 <a href="#contact" class="text-slate-300 hover:text-emerald-400 transition">聯絡合作</a>
             </nav>
 
             <div class="hidden md:flex items-center space-x-4">
-                <a href="https://instagram.com" target="_blank" class="text-slate-400 hover:text-pink-500 transition text-lg"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://tiktok.com" target="_blank" class="text-slate-400 hover:text-white transition text-lg"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://youtube.com" target="_blank" class="text-slate-400 hover:text-red-500 transition text-lg"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.instagram.com/chester._.golf/" target="_blank" class="text-slate-400 hover:text-pink-500 transition text-lg" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@chester.golf.select" target="_blank" class="text-slate-400 hover:text-white transition text-lg" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@Chester-Golf" target="_blank" class="text-slate-400 hover:text-red-500 transition text-lg" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="relative py-24 overflow-hidden border-b border-slate-800/80">
+    <section class="relative py-20 overflow-hidden border-b border-slate-800/80">
         <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-900/20 via-golf-dark to-golf-dark"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 mb-6">
-                Data-Driven Golf Science
+                Chester Golf Selects & Science
             </span>
             <h1 class="text-4xl sm:text-6xl font-black tracking-tight mb-6 leading-tight">
-                解構揮桿機制，<br class="hidden sm:inline"><span class="bg-gradient-to-r from-emerald-400 to-amber-300 bg-clip-text text-transparent">用數據重塑你的高爾夫體驗</span>
+                解構揮桿機制，<br class="hidden sm:inline"><span class="bg-gradient-to-r from-emerald-400 to-amber-300 bg-clip-text text-transparent">嚴選高品質中古高爾夫裝備</span>
             </h1>
             <p class="max-w-2xl mx-auto text-slate-400 text-lg sm:text-xl mb-10 font-light">
-                融合心理學洞察與運動科學，突破傳統教學框架。從擊球效率（Smash Factor）到彈道分析，帶你精準掌握每一次揮桿。
+                融合運動科學與專業裝備推薦。為新手與球友配好「一線品牌、大滿貫、下場完全不缺桿」的極致性價比選擇！
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#calculator" class="px-8 py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-600 text-slate-950 transition shadow-lg shadow-emerald-500/25 flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-calculator"></i>
-                    <span>體驗數據計算機</span>
+                <a href="#store" class="px-8 py-3.5 rounded-xl font-bold bg-amber-500 hover:bg-amber-600 text-slate-950 transition shadow-lg shadow-amber-500/25 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-fire"></i>
+                    <span>搶購現貨全套桿 ($8,000)</span>
                 </a>
-                <a href="#content" class="px-8 py-3.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center justify-center space-x-2">
-                    <i class="fa-solid fa-play"></i>
-                    <span>探索影音內容</span>
+                <a href="#calculator" class="px-8 py-3.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-calculator"></i>
+                    <span>體驗揮桿數據計算機</span>
                 </a>
             </div>
         </div>
     </section>
 
+    <!-- Featured Product Showcase Section -->
+    <section id="store" class="py-20 border-b border-slate-800/80 bg-slate-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">僅此一袋．先私訊先搶</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4 mb-3">限時特惠中古球具選品</h2>
+                <p class="text-slate-400">新手想打高爾夫被裝備預算嚇退？這袋一線品牌全套桿讓你一次下場搞定！</p>
+            </div>
+
+            <!-- Single Featured Product Card -->
+            <div class="max-w-4xl mx-auto bg-golf-card rounded-3xl border border-slate-700 overflow-hidden shadow-2xl relative">
+                <div class="grid grid-cols-1 md:grid-cols-12">
+                    <!-- Product Image Area -->
+                    <div class="md:col-span-5 bg-slate-800 relative min-h-[320px] flex items-center justify-center overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent z-10"></div>
+                        <i class="fa-solid fa-golf-ball-tee text-8xl text-emerald-500/20"></i>
+                        <span class="absolute top-4 left-4 z-20 px-3 py-1 bg-emerald-500 text-slate-950 font-black text-xs uppercase rounded-full shadow-lg">
+                            【未售出】現貨
+                        </span>
+                        <div class="absolute bottom-4 left-4 right-4 z-20 text-xs text-slate-300 flex justify-between items-center bg-slate-900/80 backdrop-blur px-3 py-2 rounded-lg border border-slate-700">
+                            <span><i class="fa-solid fa-cubes text-amber-400 mr-1"></i> 12 支大滿貫全套</span>
+                            <span class="text-emerald-400 font-bold">加碼送 Tee + 練習球</span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details Area -->
+                    <div class="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-2xl font-black text-white leading-snug">日美大廠 12 支大滿貫新手全套桿</h3>
+                            </div>
+                            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                                新手想打高爾夫，不用再被幾萬塊預算嚇退！直接幫你配好一袋「一線品牌、12 支大滿貫、下場完全不缺桿」的優質中古套桿！
+                            </p>
+
+                            <!-- Specs Preview -->
+                            <div class="space-y-2 mb-6 text-xs text-slate-300">
+                                <div class="flex items-center space-x-2 bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+                                    <span class="text-amber-400 font-bold">1號木</span>
+                                    <span>TaylorMade r7 SuperQuad (9.5度)</span>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+                                    <span class="text-emerald-400 font-bold">球道木</span>
+                                    <span>Mizuno CLK FL-HI (17度)</span>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+                                    <span class="text-cyan-400 font-bold">鐵桿組</span>
+                                    <span>Mizuno Zephyr LG190 (4–9, P, F, S 共 9 支)</span>
+                                </div>
+                                <div class="flex items-center space-x-2 bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+                                    <span class="text-purple-400 font-bold">推桿/袋</span>
+                                    <span>Never Compromise GM2 + GoPlayer 腳架袋</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Price and Actions -->
+                        <div class="border-t border-slate-800 pt-6">
+                            <div class="flex items-baseline justify-between mb-4">
+                                <div>
+                                    <span class="text-xs text-slate-400 line-through mr-2">原價 $8,500</span>
+                                    <span class="text-3xl font-black text-amber-400">$8,000</span>
+                                    <span class="text-xs text-emerald-400 ml-1">（追蹤按讚折 $500）</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="openModal()" class="py-3 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition text-sm flex items-center justify-center space-x-1">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    <span>查看詳細介紹</span>
+                                </button>
+                                <a href="https://www.instagram.com/chester._.golf/" target="_blank" class="py-3 rounded-xl font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 transition text-sm flex items-center justify-center space-x-1 shadow-lg shadow-emerald-500/20">
+                                    <i class="fa-brands fa-instagram"></i>
+                                    <span>私訊搶購 (IG)</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-golf-card border border-slate-700 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-5 right-5 w-10 h-10 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">狀態：【未售出】</span>
+            <h3 class="text-2xl font-black text-white mt-3 mb-4">日美大廠 12 支大滿貫新手全套桿</h3>
+
+            <div class="prose prose-invert text-sm text-slate-300 space-y-4 leading-relaxed mb-6">
+                <p>
+                    新手想打高爾夫，是不是常被幾萬塊的裝備預算嚇退？ 🏌️‍♂️💸<br>
+                    別急！看到這篇你就真的賺到了！我們直接幫你配好一袋「一線品牌、12 支大滿貫、下場完全不缺桿」的中古套桿！
+                </p>
+
+                <h4 class="text-base font-bold text-amber-400 border-b border-slate-800 pb-2">【球具配備與亮點分析】</h4>
+                
+                <div class="space-y-3">
+                    <div>
+                        <strong class="text-white block">✨ 一號木桿｜TaylorMade r7 SuperQuad (9.5度)</strong>
+                        <p class="text-xs text-slate-400">美系木桿霸主的傳奇經典！底部搭載 MWT 四顆可調配重螺絲，擊球打感紮實、容錯率高，輕鬆打出超遠距離。</p>
+                    </div>
+                    <div>
+                        <strong class="text-white block">✨ 球道木桿｜Mizuno CLK FL-HI (17度)</strong>
+                        <p class="text-xs text-slate-400">日系美津濃高容錯球道木，專治長距離球道開球或補距離，起球非常容易。</p>
+                    </div>
+                    <div>
+                        <strong class="text-white block">✨ 鐵桿全套｜Mizuno Zephyr LG190 (4–9, P, F, S 共 9 支)</strong>
+                        <p class="text-xs text-slate-400">罕見的 9 支大全套！除了基礎 4–9 號鐵，連最難湊的 P（披起桿）、F（補隙桿/AW）、S（沙坑桿） 短桿切桿系統全幫你配齊，買回去不用再花錢補挖起桿。</p>
+                    </div>
+                    <div>
+                        <strong class="text-white block">✨ 推桿｜Never Compromise GM2 Exchange (刀背型)</strong>
+                        <p class="text-xs text-slate-400">知名推桿大廠的配重調整型推桿，金屬線條質感極佳，推球路線極度穩定。</p>
+                    </div>
+                    <div>
+                        <strong class="text-white block">✨ 球袋｜GoPlayer 輕量紅黑腳架袋</strong>
+                        <p class="text-xs text-slate-400">輕量化好攜帶，站立腳架方便練習場與下場使用。</p>
+                    </div>
+                </div>
+
+                <h4 class="text-base font-bold text-emerald-400 border-b border-slate-800 pb-2 pt-2">【限時優惠與甜甜價】</h4>
+                <p>
+                    💰 <strong>整袋大滿貫甜甜價 $8,500！！</strong><br>
+                    🎁 <strong>追蹤帳號、按讚粉專再折扣 $500（實收只要 $8,000 元）！</strong><br>
+                    💥 <strong>加碼免費送：下場必備高爾夫球 Tee ＋ 練習球組！</strong>
+                </p>
+                <p class="text-xs text-slate-400 italic">
+                    整袋包含 TaylorMade ＋ Mizuno ＋ Never Compromise 三大名牌，12 支組合超完整，買回去練習場或直接下場通通一次搞定。就只有這一袋，先私訊先搶，手慢就被抱走啦！
+                </p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-slate-800">
+                <a href="https://www.instagram.com/chester._.golf/" target="_blank" class="flex-1 py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-600 text-slate-950 transition text-center flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>IG 私訊搶購 ($8,000)</span>
+                </a>
+                <a href="https://www.tiktok.com/@chester.golf.select" target="_blank" class="flex-1 py-3.5 rounded-xl font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition text-center flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>TikTok 私訊詢問</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- About Section -->
-    <section id="about" class="py-20 border-b border-slate-800/80 bg-slate-900/40">
+    <section id="about" class="py-20 border-b border-slate-800/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
                     <span class="text-emerald-400 font-bold tracking-wider uppercase text-sm">About Chester Golf</span>
-                    <h2 class="text-3xl font-extrabold text-white">結合運動科學、數據與短影音創意的個人品牌</h2>
+                    <h2 class="text-3xl font-extrabold text-white">結合運動科學、數據與嚴選裝備的個人品牌</h2>
                     <p class="text-slate-300 leading-relaxed">
                         歡迎來到 <strong>Chester Golf</strong>。這裡是一個結合運動科學、數據分析與短影音內容的高爾夫個人品牌空間。我們相信，精準的揮桿不僅來自重複的練習，更源於對力學機制的深刻理解。
                     </p>
                     <p class="text-slate-300 leading-relaxed">
-                        透過結合現代科技（如 Launch Monitor 數據測量與追蹤系統），我們打破傳統高爾夫教學的模糊感，將複雜的桿頭速度、擊球效率（Smash Factor）與彈道軌跡化為清晰可見的數位指標。
+                        同時，我們提供嚴選中古高爾夫球具，幫球友以最划算的價格配齊高品質下場裝備。
                     </p>
-                    <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-800">
-                        <div>
-                            <div class="text-2xl font-black text-amber-400">200K+</div>
-                            <div class="text-xs text-slate-400 mt-1">TikTok 最高流量</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-black text-emerald-400">1.45+</div>
-                            <div class="text-xs text-slate-400 mt-1">目標 Smash Factor</div>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-black text-cyan-400">100%</div>
-                            <div class="text-xs text-slate-400 mt-1">數據科學分析</div>
-                        </div>
-                    </div>
                 </div>
                 <div class="bg-golf-card p-8 rounded-2xl border border-slate-800 shadow-2xl relative">
-                    <div class="absolute -top-3 -right-3 w-20 h-20 bg-emerald-500/10 rounded-full blur-xl"></div>
                     <h3 class="text-xl font-bold mb-6 text-emerald-400 flex items-center space-x-2">
                         <i class="fa-solid fa-bullseye"></i>
-                        <span>Chester Golf 三大核心</span>
+                        <span>Chester Golf 核心價值</span>
                     </h3>
                     <div class="space-y-6">
                         <div class="flex items-start space-x-4">
@@ -124,15 +259,8 @@
                         <div class="flex items-start space-x-4">
                             <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 font-bold">2</div>
                             <div>
-                                <h4 class="font-bold text-slate-100">心理素質與賽場表現</h4>
-                                <p class="text-sm text-slate-400 mt-1">結合臨床心理背景，解析在高壓環境下的抗壓心態與專注調節。</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="w-10 h-10 rounded-lg bg-cyan-500/10 text-cyan-400 flex items-center justify-center shrink-0 font-bold">3</div>
-                            <div>
-                                <h4 class="font-bold text-slate-100">高質感短影音呈現</h4>
-                                <p class="text-sm text-slate-400 mt-1">精緻腳本與專業後製，將艱深的揮桿技術轉化為輕鬆易懂的自媒體內容。</p>
+                                <h4 class="font-bold text-slate-100">高性價比球具嚴選</h4>
+                                <p class="text-sm text-slate-400 mt-1">親自把關中古裝備狀態，提供新手完整無缺桿的大滿貫組合。</p>
                             </div>
                         </div>
                     </div>
@@ -142,11 +270,11 @@
     </section>
 
     <!-- Swing Calculator Section -->
-    <section id="calculator" class="py-20 border-b border-slate-800/80">
+    <section id="calculator" class="py-20 border-b border-slate-800/80 bg-slate-900/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <h2 class="text-3xl font-extrabold text-white mb-4">即時揮桿數據與距離演算器</h2>
-                <p class="text-slate-400">輸入你的桿頭速度與擊球參數，系統將自動演算預估飛擊距離 (Carry Distance) 與 AI 動作診斷建議。</p>
+                <p class="text-slate-400">輸入你的桿頭速度與擊球參數，系統將自動演算預估飛擊距離與 AI 動作診斷建議。</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -214,76 +342,13 @@
                                 <span>Chester AI 揮桿診斷建議</span>
                             </div>
                             <p id="aiAdvice" class="text-sm text-slate-300 leading-relaxed">
-                                你的 Smash Factor 表現優異，能量傳遞效率非常高！建議保持當前擊球點，可微調發射角以追求最佳滾動距離。
+                                你的 Smash Factor 表現優異，能量傳遞效率非常高！建議保持當前擊球點。
                             </p>
                         </div>
                     </div>
 
                     <div class="text-xs text-slate-500 text-center">
-                        * 本數據採用標準大氣壓與海平面彈道模型演算，實際表現將受風速與場地環境影響。
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Feed Section -->
-    <section id="content" class="py-20 border-b border-slate-800/80 bg-slate-900/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                    <h2 class="text-3xl font-extrabold text-white mb-2">精選短影音與文章專區</h2>
-                    <p class="text-slate-400">實測數據、揮桿機制拆解與高品質教學短片。</p>
-                </div>
-            </div>
-
-            <!-- Content Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="bg-golf-card rounded-2xl border border-slate-800 overflow-hidden hover:border-slate-700 transition">
-                    <div class="h-48 bg-slate-800 flex items-center justify-center relative">
-                        <i class="fa-solid fa-golf-ball-tee text-5xl text-emerald-500/40"></i>
-                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-xs font-bold px-2.5 py-1 rounded text-emerald-400 border border-slate-700">短影音</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg text-slate-100 mb-2">如何在 30 天內提升 5 mph 桿頭速度？</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4">解析地面反應力（GRF）與核心旋轉鏈的搭配，打造不費力的暴飛揮桿。</p>
-                        <div class="flex items-center justify-between text-xs text-slate-500 border-t border-slate-800/80 pt-4">
-                            <span><i class="fa-solid fa-eye mr-1"></i> 200k+ 觀看</span>
-                            <span class="text-emerald-400">看影片 <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-golf-card rounded-2xl border border-slate-800 overflow-hidden hover:border-slate-700 transition">
-                    <div class="h-48 bg-slate-800 flex items-center justify-center relative">
-                        <i class="fa-solid fa-chart-pie text-5xl text-amber-500/40"></i>
-                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-xs font-bold px-2.5 py-1 rounded text-amber-400 border border-slate-700">數據實測</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg text-slate-100 mb-2">Smash Factor 1.35 vs 1.48 的距離差異到底有多大？</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4">用 Launch Monitor 精準對比甜蜜點擊球與偏心擊球的實際距離損失。</p>
-                        <div class="flex items-center justify-between text-xs text-slate-500 border-t border-slate-800/80 pt-4">
-                            <span><i class="fa-solid fa-eye mr-1"></i> 10k+ 觀看</span>
-                            <span class="text-emerald-400">閱讀分析 <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-golf-card rounded-2xl border border-slate-800 overflow-hidden hover:border-slate-700 transition">
-                    <div class="h-48 bg-slate-800 flex items-center justify-center relative">
-                        <i class="fa-solid fa-brain text-5xl text-cyan-500/40"></i>
-                        <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-xs font-bold px-2.5 py-1 rounded text-cyan-400 border border-slate-700">運動心理</span>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-bold text-lg text-slate-100 mb-2">站在第 1 洞 T-Box 的緊張感該如何破解？</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-4">臨床心理學實用專注技巧：Pre-shot Routine（擊球前準備流程）的建立。</p>
-                        <div class="flex items-center justify-between text-xs text-slate-500 border-t border-slate-800/80 pt-4">
-                            <span><i class="fa-solid fa-eye mr-1"></i> 5k+ 閱讀</span>
-                            <span class="text-emerald-400">閱讀全文 <i class="fa-solid fa-arrow-right ml-1"></i></span>
-                        </div>
+                        * 本數據採用標準大氣壓與海平面彈道模型演算。
                     </div>
                 </div>
             </div>
@@ -294,7 +359,7 @@
     <section id="contact" class="py-20 border-b border-slate-800/80">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-extrabold text-white mb-4">聯絡 Chester / 合作諮詢</h2>
-            <p class="text-slate-400 mb-8">無論是品牌合作、影音企劃，或是球具評測諮詢，歡迎填寫表單與我聯繫！</p>
+            <p class="text-slate-400 mb-8">無論是品牌合作、影音企劃，或是球具買賣諮詢，歡迎填寫表單或直接社群私訊！</p>
 
             <form onsubmit="handleContact(event)" class="bg-golf-card p-8 rounded-2xl border border-slate-800 space-y-6 text-left">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -309,7 +374,7 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-300 mb-2">訊息內容</label>
-                    <textarea rows="4" required placeholder="請輸入您的合作想法或問題..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500"></textarea>
+                    <textarea rows="4" required placeholder="請輸入您的合作想法或球具諮詢..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-200 focus:outline-none focus:border-emerald-500"></textarea>
                 </div>
                 <button type="submit" class="w-full py-3.5 rounded-xl font-bold bg-emerald-500 hover:bg-emerald-600 text-slate-950 transition shadow-lg shadow-emerald-500/20">
                     發送訊息
@@ -327,6 +392,16 @@
 
     <!-- Interactive JS Logic -->
     <script>
+        // Modal functions
+        function openModal() {
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        // Calculator Logic
         const speedInput = document.getElementById('clubSpeed');
         const smashInput = document.getElementById('smashFactor');
         const speedVal = document.getElementById('speedVal');
@@ -349,10 +424,8 @@
             const smash = parseFloat(smashInput.value);
             const club = document.getElementById('clubType').value;
 
-            // Ball Speed = Club Speed * Smash Factor
             const ballSpeed = speed * smash;
 
-            // Distance Multipliers depending on club
             let multiplier = 2.3;
             if (club === 'wood3') multiplier = 2.1;
             if (club === 'iron7') multiplier = 1.75;
@@ -363,7 +436,6 @@
             document.getElementById('resBallSpeed').textContent = ballSpeed.toFixed(1);
             document.getElementById('resCarry').textContent = carry;
 
-            // AI Diagnostics
             const aiAdvice = document.getElementById('aiAdvice');
             if (smash >= 1.48) {
                 aiAdvice.textContent = "完美甜蜜點擊球！你的 Smash Factor 達到職業水準，能量傳遞極佳！保持當前的揮桿節奏。";
@@ -380,7 +452,6 @@
             e.target.reset();
         }
 
-        // Initialize calculation on page load
         calculateSwing();
     </script>
 </body>
