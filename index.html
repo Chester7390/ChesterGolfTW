@@ -25,8 +25,6 @@
     </script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Canvas Confetti for Celebration -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body class="bg-golf-dark text-slate-100 font-sans antialiased min-h-screen flex flex-col">
 
@@ -90,24 +88,29 @@
                 <p class="text-slate-400">新手想打高爾夫被裝備預算嚇退？這袋一線品牌全套桿讓你一次下場搞定！</p>
             </div>
 
-            <!-- Single Featured Product Card -->
-            <div class="max-w-4xl mx-auto bg-golf-card rounded-3xl border border-slate-700 overflow-hidden shadow-2xl relative">
-                <div class="grid grid-cols-1 md:grid-cols-12">
+            <!-- Single Featured Product Card with Gallery -->
+            <div class="max-w-5xl mx-auto bg-golf-card rounded-3xl border border-slate-700 overflow-hidden shadow-2xl relative">
+                <div class="grid grid-cols-1 lg:grid-cols-12">
                     <!-- Product Image Area -->
-                    <div class="md:col-span-5 bg-slate-800 relative min-h-[320px] flex items-center justify-center overflow-hidden">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent z-10"></div>
-                        <i class="fa-solid fa-golf-ball-tee text-8xl text-emerald-500/20"></i>
-                        <span class="absolute top-4 left-4 z-20 px-3 py-1 bg-emerald-500 text-slate-950 font-black text-xs uppercase rounded-full shadow-lg">
-                            【未售出】現貨
-                        </span>
-                        <div class="absolute bottom-4 left-4 right-4 z-20 text-xs text-slate-300 flex justify-between items-center bg-slate-900/80 backdrop-blur px-3 py-2 rounded-lg border border-slate-700">
-                            <span><i class="fa-solid fa-cubes text-amber-400 mr-1"></i> 12 支大滿貫全套</span>
-                            <span class="text-emerald-400 font-bold">加碼送 Tee + 練習球</span>
+                    <div class="lg:col-span-6 bg-slate-950 p-4 flex flex-col justify-between">
+                        <div class="relative overflow-hidden rounded-2xl border border-slate-800 group">
+                            <img id="mainProductImg" src="golf_set_1.jpg" alt="日美大廠 12 支大滿貫新手全套桿" class="w-full h-80 object-cover object-center group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 left-3 z-20 px-3 py-1 bg-emerald-500 text-slate-950 font-black text-xs uppercase rounded-full shadow-lg">
+                                【未售出】現貨
+                            </span>
+                        </div>
+                        
+                        <!-- Thumbnail Grid -->
+                        <div class="grid grid-cols-4 gap-2 mt-3">
+                            <img src="golf_set_1.jpg" onclick="switchImg('golf_set_1.jpg')" class="h-16 w-full object-cover rounded-lg border-2 border-emerald-500 cursor-pointer hover:opacity-80 transition thumb-btn">
+                            <img src="golf_set_2.jpg" onclick="switchImg('golf_set_2.jpg')" class="h-16 w-full object-cover rounded-lg border-2 border-transparent cursor-pointer hover:opacity-80 transition thumb-btn">
+                            <img src="golf_set_3.jpg" onclick="switchImg('golf_set_3.jpg')" class="h-16 w-full object-cover rounded-lg border-2 border-transparent cursor-pointer hover:opacity-80 transition thumb-btn">
+                            <img src="golf_set_4.jpg" onclick="switchImg('golf_set_4.jpg')" class="h-16 w-full object-cover rounded-lg border-2 border-transparent cursor-pointer hover:opacity-80 transition thumb-btn">
                         </div>
                     </div>
 
                     <!-- Product Details Area -->
-                    <div class="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between">
+                    <div class="lg:col-span-6 p-6 sm:p-8 flex flex-col justify-between">
                         <div>
                             <div class="flex justify-between items-start mb-2">
                                 <h3 class="text-2xl font-black text-white leading-snug">日美大廠 12 支大滿貫新手全套桿</h3>
@@ -392,6 +395,22 @@
 
     <!-- Interactive JS Logic -->
     <script>
+        // Switch gallery images
+        function switchImg(imgSrc) {
+            document.getElementById('mainProductImg').src = imgSrc;
+            // Update active thumbnail border
+            const thumbs = document.querySelectorAll('.thumb-btn');
+            thumbs.forEach(t => {
+                if(t.getAttribute('src') === imgSrc) {
+                    t.classList.add('border-emerald-500');
+                    t.classList.remove('border-transparent');
+                } else {
+                    t.classList.remove('border-emerald-500');
+                    t.classList.add('border-transparent');
+                }
+            });
+        }
+
         // Modal functions
         function openModal() {
             document.getElementById('productModal').classList.remove('hidden');
